@@ -1,6 +1,6 @@
 <template lang="pug">
 .AppScaffold
-  router-view.main
+  router-view.main(:style="customMainStyle")
   header(v-if="$slots['header']" :class="{sticky:isHeaderSticky}")
     slot(name="header")
   footer(v-if="$slots['footer']" :class="{sticky:isFooterSticky}")
@@ -29,8 +29,18 @@ export default {
     menuMaxWidth: { type: String, default: '40vw' },
     menuHeight: { type: String, default: 'auto' },
     menuMaxHeight: { type: String, default: '24rem' },
+    mainWidth: { type: String, default: '100%' },
+    mainMaxWidth: { type: String, default: '36rem' },
+    mainBgColor: { type: String, default: 'none' },
   },
   computed: {
+    customMainStyle() {
+      return {
+        '--mainWidth': this.mainWidth,
+        '--mainMaxWidth': this.mainMaxWidth,
+        '--mainBgColor': this.mainBgColor,
+      };
+    },
     customMenuStyle() {
       return {
         '--menuWidth': this.menuWidth,
@@ -92,6 +102,11 @@ footer {
 }
 .main {
   grid-area: main;
+  justify-self: center;
+
+  width: var(--mainWidth);
+  max-width: var(--mainMaxWidth);
+  background-color: var(--mainBgColor);
 }
 
 nav {
@@ -109,7 +124,7 @@ nav {
 
   .slideMenu {
     // --menuWidth: clamp(12rem, 60vw, 32rem);
-    background-color: white;
+    // background-color: white;
     height: 100%;
     width: var(--menuWidth);
     max-width: var(--menuMaxWidth);

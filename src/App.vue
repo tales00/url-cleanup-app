@@ -1,9 +1,11 @@
 <template lang="pug">
-AppScaffold
+AppScaffold(
+  :mainBgColor="'hsl(0, 0%, 92%)'"
+)
   template(v-slot:header)
     HeaderBar
   template(v-slot:footer)
-    FooterBar(:isFooterSticky="true")
+    FooterBar(:isFooterSticky="false")
   router-view
 </template>
 
@@ -11,6 +13,7 @@ AppScaffold
 import AppScaffold from '@/components/AppScaffold.vue';
 import HeaderBar from './components/HeaderBar.vue';
 import FooterBar from './components/FooterBar.vue';
+
 export default {
   name: 'app',
   components: {
@@ -20,4 +23,5 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" scoped></style>

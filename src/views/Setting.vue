@@ -1,11 +1,11 @@
 <template lang="pug">
-main About comp
+main Setting comp
 </template>
 
 <script>
 // @ is an alias to /src
 
 export default {
-  name: 'About',
+  name: 'Setting',
 };
 </script>

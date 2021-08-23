@@ -1,6 +1,7 @@
 <template lang="pug">
 .AppScaffold
-  router-view.main(:style="customMainStyle")
+  .main(:style="customMainStyle")
+    slot
   header(v-if="$slots['header']" :class="{sticky:isHeaderSticky}")
     slot(name="header")
   footer(v-if="$slots['footer']" :class="{sticky:isFooterSticky}")

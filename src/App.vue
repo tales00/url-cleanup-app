@@ -1,29 +1,19 @@
 <template lang="pug">
-#nav
-  router-link(to="/") Home |
-  router-link(to="/about") About
-router-view
+AppScaffold
+  template(v-slot:header)
+    HeaderBar
+  router-view
 </template>
 
-<style lang="scss" scoped>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+<script>
+import AppScaffold from '@/components/AppScaffold.vue';
+import HeaderBar from './components/HeaderBar.vue';
+export default {
+  name: 'app',
+  components: {
+    AppScaffold,
+    HeaderBar,
+  },
+};
+</script>
+<style lang="scss" scoped></style>

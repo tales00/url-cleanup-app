@@ -1,0 +1,33 @@
+// Responsive breakpoints
+$size-xs: 480px;
+$size-sm: 600px;
+$size-md: 900px;
+$size-lg: 1200px;
+$size-xl: 1800px;
+$size-xxl: 2400px;
+
+$max-xxs: $size-xs - 1;
+$min-mobile: $size-sm;
+$max-mobile: $size-md - 1;
+
+$min-tablet: $size-md;
+$max-tablet: $size-lg - 1;
+
+$min-desktop: $size-lg;
+$max-desktop: $size-xl - 1;
+
+$min-wide: $size-xl;
+$max-wide: $size-xxl - 1;
+
+$min-full: $size-xxl;
+// $max-full: $size-xxl - 1;
+
+//
+// $app-bg: hsla(220, 66%, 80%, 1);
+$app-bg: hsla(0, 0%, 95%, 1);
+$app-color: hsla(240, 25%, 25%, 1);
+$content-bg: hsla(0, 0%, 96%, 1);
+$content-color: hsla(240, 16%, 40%, 1);
+$theme-bg: hsla(215, 70%, 80%, 1);
+
+$content-color-light: hsla(240, 16%, 70%, 1);

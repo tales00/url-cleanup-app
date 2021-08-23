@@ -1,0 +1,124 @@
+@import '_modules/_variables';
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Noto+Sans+TC:400,500,700,900|Noto+Sans+JP:400,500,700,900&subset=chinese-traditional,japanese');
+
+$fallback-font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'PMingliu',
+  -apple-system, system-ui, BlinkMacSystemFont, sans-serif;
+$base-font-family: Roboto, 'Segoe UI', 'Fira Sans', 'Droid Sans';
+$cjk-zhtw-font-family: $base-font-family, 'Noto Sans TC', 'Microsoft JhengHei';
+$cjk-jp-font-family: $base-font-family, 'Noto Sans JP', 'Hiragino Sans',
+  'Hiragino Kaku Gothic Pro', 'Yu Gothic', YuGothic, Meiryo;
+
+:lang(en) {
+  font-family: $base-font-family, $fallback-font-family;
+}
+:lang(ja) {
+  font-family: $cjk-jp-font-family, $fallback-font-family;
+}
+:lang(zh),
+:lang(zh-TW) {
+  font-family: $cjk-zhtw-font-family, $fallback-font-family;
+}
+
+// 1.位置屬性(position, top, right, z-index, display, float等)
+// 2.大小(width, height, padding, margin)
+// 3.文字系列(font, line-height, letter-spacing, color- text-align等)
+// 4.背景(background, border等)
+// 5.其他(animation, transition等)
+:root {
+  // 480/ 600/ 900/ 1200/ 1800/ 2400
+  --size-xs: #{$size-xs}; // 400
+  --size-sm: #{$size-sm}; // 600
+  --size-md: #{$size-md}; // 900
+  --size-lg: #{$size-lg}; // 1200
+  --size-xl: #{$size-xl}; // 1800
+  --size-xxl: #{$size-xxl}; // 2400
+
+  --app-max-width: auto;
+  --cell: 0.5rem;
+  --box-shadow: 0.2rem 0.2rem 1rem;
+  --color-shadow: hsl(0, 0%, 96%);
+
+  --nav-height: 3.5rem;
+  --app-bg-color: hsl(0, 0%, 90%);
+
+  font-family: $base-font-family;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  // scroll-behavior: smooth;
+  // font-size: clamp(12px, calc(100vw / 30), 20px);
+  // font-size: clamp(14px, calc(100vw / 34), 22px);
+  font-size: clamp(14px, calc(100vw / 36), 28px);
+  line-height: 1.2;
+  height: 100%;
+  height: -webkit-fill-available;
+
+  &:focus-within {
+    scroll-behavior: smooth;
+  }
+}
+body {
+  max-width: var(--app-max-width);
+  margin: 0;
+  padding: 0;
+
+  // color: hsl(166, 100%, 95%);
+  // background-color: hsl(166, 100%, 35%);
+  background-color: var(--app-bg-color);
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  min-width: 100vw;
+}
+
+a {
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// body {}
+.round {
+  border-radius: 0.4rem;
+}
+//
+.invert {
+  filter: invert(100%) contrast(100);
+}
+.disable {
+  pointer-events: none;
+  filter: brightness(1.6) saturate(0);
+}
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.sticky {
+  position: sticky;
+
+  &.fix-top {
+    top: 0;
+  }
+  &.fix-bottom {
+    bottom: 0;
+  }
+}
+
+// overwrite water.css
+button,
+input[type='button'],
+input[type='submit'] {
+  padding: 0.8em 1.6em;
+}
+
+// orientation: landscape
+// orientation: Portrait

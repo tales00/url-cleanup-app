@@ -3,8 +3,8 @@
   .main #[slot]
   .top(v-if="$slots['top']") #[slot(name="top")]
   .bottom(v-if="$slots['bottom']") #[slot(name="bottom")]
-  .left(v-if="$slots['left']") #[slot(name="left")]
-  .right(v-if="$slots['right']") #[slot(name="right")]
+  .left(v-if="$slots['left']" :class="{'center': !leftAlignTop}") #[slot(name="left")]
+  .right(v-if="$slots['right']" :class="{'center': !rightAlignTop}") #[slot(name="right")]
   .top-left(v-if="$slots['top-left']") #[slot(name="top-left")]
   .top-right(v-if="$slots['top-right']") #[slot(name="top-right")]
   .bottom-left(v-if="$slots['bottom-left']") #[slot(name="bottom-left")]
@@ -16,6 +16,14 @@ export default {
   name: 'stack',
   props: {
     gap: { type: String, default: 'unset' },
+    leftAlignTop: {
+      type: Boolean,
+      default: false,
+    },
+    rightAlignTop: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -62,8 +70,6 @@ export default {
     grid-area: bottom-right;
   }
 
-  .left,
-  .right,
   .main,
   .top,
   .bottom,
@@ -72,6 +78,12 @@ export default {
   .bottom-left,
   .bottom-right {
     // margin: 0.25rem;
+    align-self: center;
+  }
+}
+.left,
+.right {
+  &.center {
     align-self: center;
   }
 }

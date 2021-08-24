@@ -89,9 +89,11 @@ export default {
     },
   },
   created() {
+    console.log('fullPath:', this.$route.fullPath);
     const urlKeyStart = this.$route.fullPath.indexOf('url=');
     if (urlKeyStart > -1) {
       this.uncleanUrlInput = this.$route.fullPath.substring(urlKeyStart + 4);
+      console.log('uncleanUrlInput:', this.uncleanUrlInput);
     }
   },
 };

@@ -13,13 +13,12 @@ main.home
         .inputArea(v-else)
           textarea(v-model.trim="uncleanUrlInput")
       template(v-slot:left)
-        .icon
+        .icon(:style="{paddingTop: isInputExpand? '10px' : false}")
           i.las.la-ruler-horizontal
       template(v-slot:right)
-        .option(v-if="!isInputExpand")
-          i.las.la-plus-square.la-lg
-        .option(v-else)
-          i.las.la-minus-square.la-lg
+        .option(@click="isInputExpand = !isInputExpand" :style="{paddingTop: isInputExpand? '12px' : false}")
+          i.las.la-plus-square.la-lg(v-if="!isInputExpand")
+          i.las.la-minus-square.la-lg(v-else)
   section.clearedUrl
     h5 已清理網址
     stack.header(
@@ -63,12 +62,41 @@ export default {
       return url_pattern.test(this.uncleanUrlInput);
     },
     clearedUrl() {
-      return this.isInputUrl
-        ? '清理結果'
-        : this.uncleanUrlInput.length == 0
-        ? '請輸入欲清理網址'
-        : '網址格式有誤';
+      if (this.uncleanUrlInput.length == 0) {
+        return '請輸入欲清理網址';
+      } else if (this.isInputUrl) {
+        let url = new URL(this.uncleanUrlInput);
+        // console.log([...url.searchParams.keys()]);
+
+        let deleteList = [];
+        url.searchParams.forEach((value, key) => {
+          // console.log(key, key.indexOf('utm_'));
+          if (key.toLowerCase().indexOf('utm_') === 0) {
+            deleteList.push(key);
+          }
+          if (key.toLowerCase().indexOf('fbclid') === 0) {
+            deleteList.push(key);
+          }
+        });
+        deleteList.forEach((key) => {
+          url.searchParams.delete(key);
+        });
+        // console.log([...url.searchParams.keys()]);
+        // console.log(url.searchParams.toString());
+        // console.log(url);
+        return url.href;
+      } else {
+        return '網址格式有誤';
+      }
     },
+  },
+  created() {
+    const urlKeyStart = this.$route.fullPath.indexOf('url=');
+    if (urlKeyStart > -1) {
+      this.uncleanUrlInput = this.$route.fullPath.substring(urlKeyStart + 4);
+    } else {
+      this.$router.replace('/');
+    }
   },
 };
 </script>

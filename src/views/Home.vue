@@ -64,24 +64,37 @@ export default {
         return '請輸入欲清理網址';
       } else if (this.isInputUrl) {
         let url = new URL(this.uncleanUrlInput);
-        // console.log([...url.searchParams.keys()]);
-
         let deleteList = [];
         url.searchParams.forEach((value, key) => {
           // console.log(key, key.indexOf('utm_'));
+          if (
+            url.hostname.includes('youtube.com') ||
+            url.hostname.includes('youtu.be')
+          ) {
+            if (key.toLowerCase() !== 'v' && key.toLowerCase() !== 't') {
+              deleteList.push(key);
+            }
+          }
           if (key.toLowerCase().indexOf('utm_') === 0) {
             deleteList.push(key);
           }
-          if (key.toLowerCase().indexOf('fbclid') === 0) {
+          if (key.toLowerCase() === 'fbclid') {
             deleteList.push(key);
           }
         });
         deleteList.forEach((key) => {
           url.searchParams.delete(key);
         });
-        // console.log([...url.searchParams.keys()]);
-        // console.log(url.searchParams.toString());
-        // console.log(url);
+        if (
+          url.hostname.includes('amazon.com') ||
+          url.hostname.includes('amazon.co.jp')
+        ) {
+          const matchs = url.pathname.match(/\/dp\/.{10,}\//);
+          if (Array.isArray(matchs)) {
+            const [dpCode] = matchs;
+            url.href = url.origin + dpCode;
+          }
+        }
         return url.href;
       } else {
         return '網址格式有誤';
@@ -89,12 +102,11 @@ export default {
     },
   },
   created() {
-    console.log('fullPath:', this.$route.fullPath);
     const urlKeyStart = this.$route.fullPath.indexOf('url=');
     if (urlKeyStart > -1) {
       this.uncleanUrlInput = this.$route.fullPath.substring(urlKeyStart + 4);
-      console.log('uncleanUrlInput:', this.uncleanUrlInput);
     }
+    this.$router.replace('/');
   },
 };
 </script>

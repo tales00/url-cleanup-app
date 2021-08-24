@@ -13,10 +13,10 @@ main.home
         .inputArea(v-else)
           textarea(v-model.trim="uncleanUrlInput")
       template(v-slot:left)
-        .icon(:style="{paddingTop: isInputExpand? '10px' : false}")
+        .icon(:style="{paddingTop: isInputExpand? '12px' : 'unset'}")
           i.las.la-ruler-horizontal
       template(v-slot:right)
-        .option(@click="isInputExpand = !isInputExpand" :style="{paddingTop: isInputExpand? '12px' : false}")
+        .option(@click="isInputExpand = !isInputExpand" :style="{paddingTop: isInputExpand? '12px' : 'unset'}")
           i.las.la-plus-square.la-lg(v-if="!isInputExpand")
           i.las.la-minus-square.la-lg(v-else)
   section.clearedUrl
@@ -41,8 +41,6 @@ main.home
 
 <script>
 import Stack from '@/components/Stack.vue';
-// const is_url = url => (/^(http(s)?:\/\/)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/.test(url)? url : false)
-
 const url_pattern =
   /^(http(s)?:\/\/)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
 
@@ -94,8 +92,6 @@ export default {
     const urlKeyStart = this.$route.fullPath.indexOf('url=');
     if (urlKeyStart > -1) {
       this.uncleanUrlInput = this.$route.fullPath.substring(urlKeyStart + 4);
-    } else {
-      this.$router.replace('/');
     }
   },
 };

@@ -2,7 +2,7 @@
 main.home
   section.uncleanUrl
     h5 未清理網址
-    stack.header(
+    stack(
       gap="0 0.5rem"
       :leftAlignTop="isInputExpand"
       :rightAlignTop="isInputExpand"
@@ -19,9 +19,10 @@ main.home
         .option(@click="isInputExpand = !isInputExpand" :style="{paddingTop: isInputExpand? '12px' : 'unset'}")
           i.las.la-plus-square.la-lg(v-if="!isInputExpand")
           i.las.la-minus-square.la-lg(v-else)
+
   section.clearedUrl
     h5 已清理網址
-    stack.header(
+    stack(
       gap="0 0.5rem"
       :leftAlignTop="true"
       :rightAlignTop="true"
@@ -37,6 +38,24 @@ main.home
           i.las.la-smile-wink.la-lg
         .option(v-else)
           i.las.la-frown.la-lg
+
+  section.options
+    stack.center(gap="0 0.5rem")
+      template(v-slot:default)
+        .optionsContainer
+          .option
+            i.las.la-share.la-lg
+            | 分享
+          .option
+            i.las.la-copy.la-lg
+            | 複製
+          .option
+            i.las.la-external-link-alt.la-lg
+            | 開啟
+          .option
+            i.las.la-qrcode.la-lg
+            | QRcode
+
 </template>
 
 <script>
@@ -124,6 +143,20 @@ export default {
     textarea {
       flex-grow: 1;
     }
+  }
+}
+.options {
+  margin-top: 1rem;
+  .optionsContainer {
+    background-color: hsl(202, 58%, 82%);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    // font-size: 1.6rem;
+    width: 28rem;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    box-shadow: 0.2rem 0.2rem 1rem hsla(195, 5%, 15%, 0.278);
   }
 }
 </style>

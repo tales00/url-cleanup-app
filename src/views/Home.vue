@@ -40,21 +40,19 @@ main.home
           i.las.la-frown.la-lg
 
   section.options
-    stack.center(gap="0 0.5rem")
-      template(v-slot:default)
-        .optionsContainer
-          .option
-            i.las.la-share.la-lg
-            | 分享
-          .option
-            i.las.la-copy.la-lg
-            | 複製
-          .option
-            i.las.la-external-link-alt.la-lg
-            | 開啟
-          .option
-            i.las.la-qrcode.la-lg
-            | QRcode
+    .optionsContainer
+      .option
+        i.las.la-share.la-lg
+        | 分享
+      .option
+        i.las.la-copy.la-lg
+        | 複製
+      .option
+        i.las.la-external-link-alt.la-lg
+        | 開啟
+      .option
+        i.las.la-qrcode.la-lg
+        | QRcode
 
 </template>
 
@@ -147,13 +145,15 @@ export default {
 }
 .options {
   margin-top: 1rem;
+  display: flex;
+  justify-content: center;
   .optionsContainer {
     background-color: hsl(202, 58%, 82%);
     display: flex;
     align-items: center;
     justify-content: space-around;
     // font-size: 1.6rem;
-    width: 28rem;
+    width: clamp(20rem, 90vw, 30rem);
     padding: 0.8rem;
     border-radius: 1rem;
     box-shadow: 0.2rem 0.2rem 1rem hsla(195, 5%, 15%, 0.278);

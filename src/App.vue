@@ -1,11 +1,12 @@
 <template lang="pug">
 AppScaffold(
   :mainBgColor="'hsl(0, 0%, 92%)'"
+  :isFooterSticky="true"
 )
   template(v-slot:header)
     HeaderBar
   template(v-slot:footer)
-    FooterBar(:isFooterSticky="false")
+    FooterBar
   router-view
 </template>
 

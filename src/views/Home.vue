@@ -63,6 +63,7 @@ import Stack from '@/components/Stack.vue';
 const url_pattern =
   /^(http(s)?:\/\/)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
 
+// https%3A%2F%2Fcrossing.cw.com.tw%2Farticle%2F15127%3Futm_source%3Dmedia_others%26utm_medium%3Dsocial%26utm_campaign%3Dmedia_others-social-group
 export default {
   name: 'Home',
   components: {
@@ -125,7 +126,10 @@ export default {
     this.location = window.location;
     const urlKeyStart = this.$route.fullPath.indexOf('text=');
     if (urlKeyStart > -1) {
-      this.uncleanUrlInput = this.$route.fullPath.substring(urlKeyStart + 5);
+      const decodeURL = decodeURIComponent(
+        this.$route.fullPath.substring(urlKeyStart + 5),
+      );
+      this.uncleanUrlInput = decodeURL;
     }
     // this.$router.replace('/');
   },

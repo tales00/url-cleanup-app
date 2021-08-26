@@ -1,5 +1,7 @@
 <template lang="pug">
 main.home
+  section
+    p {{ location }}
   section.uncleanUrl
     h5 未清理網址
     stack(
@@ -70,6 +72,7 @@ export default {
     return {
       isInputExpand: false,
       uncleanUrlInput: '',
+      location: '',
     };
   },
   computed: {
@@ -119,11 +122,12 @@ export default {
     },
   },
   created() {
-    const urlKeyStart = this.$route.fullPath.indexOf('url=');
+    this.location = window.location;
+    const urlKeyStart = this.$route.fullPath.indexOf('text=');
     if (urlKeyStart > -1) {
-      this.uncleanUrlInput = this.$route.fullPath.substring(urlKeyStart + 4);
+      this.uncleanUrlInput = this.$route.fullPath.substring(urlKeyStart + 5);
     }
-    this.$router.replace('/');
+    // this.$router.replace('/');
   },
 };
 </script>

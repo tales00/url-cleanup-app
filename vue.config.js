@@ -9,7 +9,7 @@ module.exports = {
         action: '/',
         method: 'GET',
         params: {
-          text: 'url',
+          text: 'text',
         },
       },
     },

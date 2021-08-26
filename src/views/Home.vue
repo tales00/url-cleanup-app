@@ -1,7 +1,5 @@
 <template lang="pug">
 main.home
-  section
-    p {{ location }}
   section.uncleanUrl
     h5 未清理網址
     stack(
@@ -31,7 +29,7 @@ main.home
     )
       template(v-slot:default)
         .inputArea
-          textarea(v-model="clearedUrl" readonly)
+          textarea(v-model="clearedUrl" rows="3" readonly)
       template(v-slot:left)
         .icon
           i.las.la-magic
@@ -41,25 +39,16 @@ main.home
         .option(v-else)
           i.las.la-frown.la-lg
 
-  section.options
-    .optionsContainer
-      .option
-        i.las.la-share.la-lg
-        | 分享
-      .option
-        i.las.la-copy.la-lg
-        | 複製
-      .option
-        i.las.la-external-link-alt.la-lg
-        | 開啟
-      .option
-        i.las.la-qrcode.la-lg
-        | QRcode
-
+  OptionBar(
+    :clearedUrl="clearedUrl"
+    :active="isOptionBarActive"
+  )
+  
 </template>
 
 <script>
 import Stack from '@/components/Stack.vue';
+import OptionBar from '@/components/optionBar.vue';
 const url_pattern =
   /^(http(s)?:\/\/)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
 
@@ -68,12 +57,12 @@ export default {
   name: 'Home',
   components: {
     Stack,
+    OptionBar,
   },
   data() {
     return {
       isInputExpand: false,
       uncleanUrlInput: '',
-      location: '',
     };
   },
   computed: {
@@ -121,9 +110,11 @@ export default {
         return '網址格式有誤';
       }
     },
+    isOptionBarActive() {
+      return url_pattern.test(this.clearedUrl);
+    },
   },
   created() {
-    this.location = window.location;
     const urlKeyStart = this.$route.fullPath.indexOf('text=');
     if (urlKeyStart > -1) {
       const decodeURL = decodeURIComponent(
@@ -149,22 +140,6 @@ export default {
     textarea {
       flex-grow: 1;
     }
-  }
-}
-.options {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  .optionsContainer {
-    background-color: hsl(202, 58%, 82%);
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    // font-size: 1.6rem;
-    width: clamp(20rem, 90vw, 30rem);
-    padding: 0.8rem;
-    border-radius: 1rem;
-    box-shadow: 0.2rem 0.2rem 1rem hsla(195, 5%, 15%, 0.278);
   }
 }
 </style>

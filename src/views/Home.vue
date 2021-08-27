@@ -28,7 +28,7 @@ main.home
       :rightAlignTop="true"
     )
       template(v-slot:default)
-        .inputArea
+        .inputArea#clearedUrl
           textarea(v-model="clearedUrl" rows="3" readonly)
       template(v-slot:left)
         .icon
@@ -40,6 +40,7 @@ main.home
           i.las.la-frown.la-lg
 
   OptionBar(
+    copyTarget="#clearedUrl"
     :clearedUrl="clearedUrl"
     :active="isOptionBarActive"
   )

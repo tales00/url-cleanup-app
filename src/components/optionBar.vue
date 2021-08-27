@@ -4,10 +4,10 @@ section.options(:class="{active}")
     .option
       i.las.la-share.la-lg
       | 分享
-    .option
+    .option#copy(:data-clipboard-target="copyTarget")
       i.las.la-copy.la-lg
       | 複製
-    .option
+    a.option(:href="clearedUrl" target="_blank")
       i.las.la-external-link-alt.la-lg
       | 開啟
     .option
@@ -17,11 +17,16 @@ section.options(:class="{active}")
 </template>
 
 <script>
+import ClipboardJS from 'clipboard';
 export default {
   name: 'optionBar',
   props: {
+    copyTarget: { type: String, default: '' },
     clearedUrl: { type: String, default: '' },
     active: { type: Boolean, default: false },
+  },
+  mounted() {
+    new ClipboardJS('#copy');
   },
 };
 </script>
@@ -46,6 +51,12 @@ export default {
     padding: 0.8rem;
     border-radius: 1rem;
     box-shadow: 0.2rem 0.2rem 1rem hsla(195, 5%, 15%, 0.278);
+
+    .option {
+      cursor: pointer;
+      display: block;
+      color: hsl(202, 17%, 20%);
+    }
   }
 }
 </style>

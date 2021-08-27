@@ -1,11 +1,11 @@
 <template lang="pug">
 stack.header(gap="0 0.5rem")
-  //- template(v-slot:default)
-    .title stack
+  template(v-slot:default)
+    .title Url cleanup app
   template(v-slot:left)
     .icon
       router-link(:to="{name:'Home'}")
-        i.las.la-home
+        img.logo(src="@/assets/logo.png")
   template(v-slot:right)
     .links
       router-link(:to="{name:'Usage'}")
@@ -35,8 +35,18 @@ export default {
   background-color: hsl(0, 0%, 94%);
   border-bottom: 1px solid hsl(0, 0%, 80%);
   padding: 0.5rem;
+  .title {
+    font-size: 1.25rem;
+  }
   .icon {
     font-size: 1.4rem;
+
+    img {
+      display: block;
+    }
+    .logo {
+      width: 2rem;
+    }
   }
   // ::v-deep {}
   .links {

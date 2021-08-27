@@ -1,7 +1,7 @@
 <template lang="pug">
 section.options(:class="{active}")
   .optionsContainer
-    .option
+    .option(@click="share")
       i.las.la-share.la-lg
       | 分享
     .option#copy(:data-clipboard-target="copyTarget")
@@ -42,6 +42,18 @@ export default {
     return {
       showQrcode: false,
     };
+  },
+  methods: {
+    share() {
+      if ('share' in navigator) {
+        navigator
+          .share({
+            text: this.clearedUrl,
+          })
+          .then(() => console.log('成功！'))
+          .catch((error) => console.log('發生錯誤', error));
+      }
+    },
   },
   mounted() {
     new ClipboardJS('#copy');

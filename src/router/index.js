@@ -16,12 +16,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ '@/views/About.vue'),
   },
-  {
-    path: '/setting',
-    name: 'Setting',
-    component: () =>
-      import(/* webpackChunkName: "setting" */ '@/views/Setting.vue'),
-  },
+  // {
+  //   path: '/setting',
+  //   name: 'Setting',
+  //   component: () =>
+  //     import(/* webpackChunkName: "setting" */ '@/views/Setting.vue'),
+  // },
   {
     path: '/usage',
     name: 'Usage',

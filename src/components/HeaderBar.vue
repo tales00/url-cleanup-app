@@ -8,9 +8,11 @@ stack.header(gap="0 0.5rem")
         i.las.la-home
   template(v-slot:right)
     .links
-      router-link(:to="{name:'Setting'}")
-        i.las.la-sliders-h.la-lg
-        | 設定
+      router-link(:to="{name:'Usage'}")
+        i.las.la-question-circle.la-lg
+        | 說明
+      router-link(:to="{name:'About'}")
+        i.las.la-info-circle.la-lg
 </template>
 
 <script>

@@ -10,20 +10,38 @@ section.options(:class="{active}")
     a.option(:href="clearedUrl" target="_blank")
       i.las.la-external-link-alt.la-lg
       | 開啟
-    .option
+    .option(@click="showQrcode = !showQrcode")
       i.las.la-qrcode.la-lg
       | QRcode
+
+section.qrcode(:class="{active}")
+  QrcodeVue(
+    renderAs="svg"
+    v-if="showQrcode"
+    :value="clearedUrl"
+    size="180"
+    margin="5"
+  )
 
 </template>
 
 <script>
 import ClipboardJS from 'clipboard';
+import QrcodeVue from 'qrcode.vue';
 export default {
   name: 'optionBar',
+  components: {
+    QrcodeVue,
+  },
   props: {
     copyTarget: { type: String, default: '' },
     clearedUrl: { type: String, default: '' },
     active: { type: Boolean, default: false },
+  },
+  data() {
+    return {
+      showQrcode: false,
+    };
   },
   mounted() {
     new ClipboardJS('#copy');
@@ -58,5 +76,16 @@ export default {
       color: hsl(202, 17%, 20%);
     }
   }
+}
+.qrcode {
+  &:not(.active) {
+    opacity: 0;
+    pointer-events: none;
+  }
+  transition: opacity 0.3s ease-out;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
 }
 </style>

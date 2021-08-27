@@ -7766,6 +7766,11 @@ q@^1.1.2:
   resolved "https://registry.npmjs.org/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
+qrcode.vue@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.npmjs.org/qrcode.vue/-/qrcode.vue-3.2.2.tgz#a719fc56fbbe52b1126e48d066f2efb2ebc057c1"
+  integrity sha512-6q4EcGfx87Unus6V3/9ys1zyB/I96E+sjFDPswWoW1sYjn/pubSUd7ZWbipV5Aq1ZONe6l7PEkgYe/rdwPVWLQ==
+
 qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.npmjs.org/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
@@ -9152,11 +9157,6 @@ tslib@^1.9.0:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.2.0:
-  version "2.3.1"
-  resolved "https://registry.npmjs.org/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
-  integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
-
 tty-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.npmjs.org/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
@@ -9510,13 +9510,6 @@ vue-loader@^15.9.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
-
-vue-qrcode@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.npmjs.org/vue-qrcode/-/vue-qrcode-0.4.0.tgz#3d2956714f87d8680cec6142850007d395719640"
-  integrity sha512-xkaJ1omfzqmEMCotrksZgnneGN8tF52NXpn5suf/lM/L5m7q6+65merbWHt4umWmTpGEZLjFGWg3MuH+HwqTLA==
-  dependencies:
-    tslib "^2.2.0"
 
 vue-router@^4.0.0-0:
   version "4.0.11"

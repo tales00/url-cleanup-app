@@ -33,15 +33,22 @@ export default {
   methods: {
     async doInstall() {
       console.log('doInstall');
-      this.installBtnShow = false;
       this.deferredPrompt.prompt();
       const { outcome } = await this.deferredPrompt.userChoice;
       console.log(`User response to the install prompt: ${outcome}`);
-      this.deferredPrompt = null;
+      if ('accepted' === outcome) {
+        this.deferredPrompt = null;
+        this.installBtnShow = false;
+      }
+      if ('dismissed' === outcome) {
+        this.installBtnShow = true;
+      }
     },
   },
-  mounted() {
+  created() {
     this.isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+  },
+  mounted() {
     window.addEventListener('appinstalled', () => {
       this.isInstalled = true;
     });

@@ -3,7 +3,10 @@ AppScaffold(
   :mainBgColor="'hsl(0, 0%, 92%)'"
 )
   template(v-slot:header)
-    HeaderBar
+    HeaderBar(
+      :installBtnShow="installBtnShow"
+      @doInstall="doInstall"
+    )
   router-view
 </template>
 
@@ -18,6 +21,40 @@ export default {
     AppScaffold,
     HeaderBar,
     FooterBar,
+  },
+  data() {
+    return {
+      installBtnShow: false,
+      isStandalone: false,
+      isInstalled: false,
+      deferredPrompt: undefined,
+    };
+  },
+  methods: {
+    async doInstall() {
+      console.log('doInstall');
+      this.installBtnShow = false;
+      this.deferredPrompt.prompt();
+      const { outcome } = await this.deferredPrompt.userChoice;
+      console.log(`User response to the install prompt: ${outcome}`);
+      this.deferredPrompt = null;
+    },
+  },
+  mounted() {
+    this.isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    window.addEventListener('appinstalled', () => {
+      this.isInstalled = true;
+    });
+    window.addEventListener('beforeinstallprompt', (evn) => {
+      // Prevent the mini-infobar from appearing on mobile
+      evn.preventDefault();
+      // Stash the event so it can be triggered later.
+      this.deferredPrompt = evn;
+      // Update UI notify the user they can install the PWA
+      this.installBtnShow = true;
+      // Optionally, send analytics event that PWA install promo was shown.
+      console.log(`'beforeinstallprompt' event was fired.`);
+    });
   },
 };
 </script>

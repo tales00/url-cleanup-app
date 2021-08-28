@@ -8,6 +8,9 @@ stack.header(gap="0 0.5rem")
         img.logo(src="@/assets/logo.png")
   template(v-slot:right)
     .links
+      .install(v-if="installBtnShow" @click="$emit('doInstall')")
+        i.las.la-cloud-download-alt.la-lg
+        | 安裝
       router-link(:to="{name:'Usage'}")
         i.las.la-question-circle.la-lg
         | 說明
@@ -17,16 +20,15 @@ stack.header(gap="0 0.5rem")
 
 <script>
 import Stack from '@/components/Stack.vue';
-// import { mapMutations } from 'vuex';
 
 export default {
   name: 'headerBar',
+  props: {
+    installBtnShow: { type: Boolean, default: false },
+  },
   components: {
     Stack,
   },
-  // methods: {
-  //   ...mapMutations(['toggleMenu']),
-  // },
 };
 </script>
 
@@ -36,7 +38,7 @@ export default {
   border-bottom: 1px solid hsl(0, 0%, 80%);
   padding: 0.5rem;
   .title {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
   .icon {
     font-size: 1.4rem;
@@ -54,7 +56,8 @@ export default {
     justify-content: flex-end;
     font-size: 0.8rem;
 
-    & > a {
+    & > a,
+    .install {
       display: block;
       padding: 0.2rem 0.4rem;
       border: 1px solid transparent;

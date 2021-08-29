@@ -14,6 +14,7 @@ main.usage
         | 讓它變得更簡短
       li 
         | 清理後的網址可直接開啟，或是再次分享出去
+      
   section.step.step1
     h4.title 一般使用
     figure
@@ -36,7 +37,14 @@ main.usage
       figcaption 手機可利用系統的分享功能將帶追蹤碼的網址傳給此 APP
       img(src="@/assets/step/step_2-3.png"
          alt="可利用系統的分享功能將帶追蹤碼的網址傳給此 APP")
-
+  section.ios
+    h4.title 關於 iOS 的 safari
+    p
+      | * 在 iOS 的 safari 上不會出現「安裝」的選項，可使用「儲存到主畫面」，
+      | 但我不確定這跟 android 上的安裝會不會是同樣的意義，
+      | 也不清楚能不能接收系統的分享功能。
+    p
+      | 因為我沒有 iOS 裝置可以測試。
   section.notice
     h4.title 備註
     ul
@@ -45,6 +53,16 @@ main.usage
       li "fbclid"
       li amazon 商品頁的網址
       li youtube 影片網址會去掉所有除了時間戳記之外的參數
+      li 
+        | 這個 app 主要的價值還是在行動裝置上使用，在 PC 上建議
+        | 使用瀏覽器的外掛可以更無腦的達到目的，
+        | 比如說 Chrome 的 
+        a(
+          href="https://chrome.google.com/webstore/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk"
+          target="_blank"
+        )
+          | ClearURLs
+          i.las.la-external-link-alt.la-lg
 </template>
 
 <script>
@@ -62,13 +80,7 @@ export default {
 .title {
   margin-top: 0;
 }
-.notice {
-  ul {
-    font-size: 0.8rem;
-    padding-inline-start: 2rem;
-    padding-left: 2rem;
-  }
-}
+
 .step {
   figure {
     margin-top: 0;
@@ -81,5 +93,25 @@ export default {
       margin: 0.5rem 0;
     }
   }
+}
+.ios {
+  p {
+    font-size: 0.8rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+.notice {
+  ul {
+    font-size: 0.8rem;
+    padding-inline-start: 2rem;
+    padding-left: 2rem;
+  }
+}
+
+a {
+  text-decoration: underline;
+  color: hsl(220, 80%, 45%);
 }
 </style>

@@ -65,6 +65,8 @@ export default {
 .notice {
   ul {
     font-size: 0.8rem;
+    padding-inline-start: 2rem;
+    padding-left: 2rem;
   }
 }
 .step {

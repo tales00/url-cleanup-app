@@ -77,7 +77,7 @@ export default {
         let url = new URL(this.uncleanUrlInput);
         let deleteList = [];
         url.searchParams.forEach((value, key) => {
-          // console.log(key, key.indexOf('utm_'));
+          // 清除 youtube 除了影片序號與時間戳記之外的所有參數
           if (
             url.hostname.includes('youtube.com') ||
             url.hostname.includes('youtu.be')
@@ -86,16 +86,29 @@ export default {
               deleteList.push(key);
             }
           }
+          // 清除 utm 相關參數
           if (key.toLowerCase().indexOf('utm_') === 0) {
             deleteList.push(key);
           }
+          // 清除 gciid
+          if (key.toLowerCase() === 'gclid') {
+            deleteList.push(key);
+          }
+          // 清除 fblciid
           if (key.toLowerCase() === 'fbclid') {
             deleteList.push(key);
           }
+          // 清除 udn 的 from
+          if (url.hostname.includes('https://udn.com/news/')) {
+            deleteList.push('from');
+          }
         });
+        //
         deleteList.forEach((key) => {
           url.searchParams.delete(key);
         });
+
+        // 清理 amazone 產品網址多餘的資訊
         if (
           url.hostname.includes('amazon.com') ||
           url.hostname.includes('amazon.co.jp')

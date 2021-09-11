@@ -50,7 +50,9 @@ main.usage
     ul
       li 目前能清理的網址如下：
       li "utm_source" 之類的參數
+      li "gclid"
       li "fbclid"
+      li udn news 的 "from" 參數
       li amazon 商品頁的網址
       li youtube 影片網址會去掉所有除了時間戳記之外的參數
       li 

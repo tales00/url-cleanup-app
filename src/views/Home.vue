@@ -9,9 +9,9 @@ main.home
     )
       template(v-slot:default)
         .inputArea(v-if="!isInputExpand")
-          input(v-model.trim="uncleanUrlInput")
+          input(v-model.trim="uncleanUrlInput" placeholder="請輸入欲清理網址")
         .inputArea(v-else)
-          textarea(v-model.trim="uncleanUrlInput")
+          textarea(v-model.trim="uncleanUrlInput" placeholder="請輸入欲清理網址")
       template(v-slot:left)
         .icon(:style="{paddingTop: isInputExpand? '12px' : 'unset'}")
           i.las.la-ruler-horizontal
@@ -72,12 +72,14 @@ export default {
     },
     clearedUrl() {
       if (this.uncleanUrlInput.length == 0) {
-        return '請輸入欲清理網址';
+        return '';
       } else if (this.isInputUrl) {
         let url = new URL(this.uncleanUrlInput);
         let deleteList = [];
         url.searchParams.forEach((value, key) => {
           // 清除 youtube 除了影片序號與時間戳記之外的所有參數
+          // https://www.youtube.com/watch?v=aWv2KjaFqBA&ab_channel=SuiseiChannel&t=99
+          // https://www.youtube.com/watch?v=aWv2KjaFqBA&t=99
           if (
             url.hostname.includes('youtube.com') ||
             url.hostname.includes('youtu.be')
@@ -86,6 +88,12 @@ export default {
               deleteList.push(key);
             }
           }
+
+          // 清除 udn 的 from
+          if (url.hostname.includes('https://udn.com/news/')) {
+            deleteList.push('from');
+          }
+
           // 清除 utm 相關參數
           if (key.toLowerCase().indexOf('utm_') === 0) {
             deleteList.push(key);
@@ -98,27 +106,34 @@ export default {
           if (key.toLowerCase() === 'fbclid') {
             deleteList.push(key);
           }
-          // 清除 udn 的 from
-          if (url.hostname.includes('https://udn.com/news/')) {
-            deleteList.push('from');
-          }
         });
+
+        // 清理 amazone 產品頁或商品頁網址多餘的資訊
+        if (
+          url.hostname.includes('amazon.com') ||
+          url.hostname.includes('amazon.co.jp')
+        ) {
+          // https://www.amazon.co.jp/b/ref=LL_BJCC_21_YuruCamp?node=8517075051&pf_rd_r=A4WCERF0E58ECKZXP2RS&pf_rd_p=bce4d981-d8bb-40c8-a32e-9ebead67acb7&pd_rd_r=5853d4ee-7823-4b40-acbd-e1d9185ffa3e&pd_rd_w=2twEO&pd_rd_wg=Tc8bC&ref_=pd_gw_unk
+          // https://www.amazon.co.jp/b?node=8517075051
+          if (url.searchParams.has('node')) {
+            url.href =
+              'https://www.amazon.co.jp/b?node=' + url.searchParams.get('node');
+          }
+
+          // https://www.amazon.co.jp/SEASON2-%E3%83%9F%E3%83%8B%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2-%E5%90%84%E5%8B%99%E5%8E%9F%E3%81%AA%E3%81%A7%E3%81%97%E3%81%93-Season2-%E5%85%A8%E9%AB%98%E7%B4%8470mm/dp/B08TXWGZ97/358-1070615-8404901?psc=1
+          // https://www.amazon.co.jp/dp/B08TXWGZ97/
+
+          const merchPattern = /\/dp\/.{10,}\//;
+          if (merchPattern.test(url.pathname)) {
+            const [dpCode] = url.pathname.match(merchPattern);
+            url.href = url.origin + dpCode;
+          }
+        }
         //
         deleteList.forEach((key) => {
           url.searchParams.delete(key);
         });
 
-        // 清理 amazone 產品網址多餘的資訊
-        if (
-          url.hostname.includes('amazon.com') ||
-          url.hostname.includes('amazon.co.jp')
-        ) {
-          const matchs = url.pathname.match(/\/dp\/.{10,}\//);
-          if (Array.isArray(matchs)) {
-            const [dpCode] = matchs;
-            url.href = url.origin + dpCode;
-          }
-        }
         return url.href;
       } else {
         return '網址格式有誤';

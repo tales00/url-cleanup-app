@@ -11,7 +11,7 @@ main.usage
         | 那些是一種「追蹤碼」
       li
         | 這個 APP 可以清除網址內某些已知的追蹤碼，
-        | 讓它變得更簡短
+        | 讓它變得更簡短（請見備註說明）
       li 
         | 清理後的網址可直接開啟，或是再次分享出去
       
@@ -49,12 +49,13 @@ main.usage
     h4.title 備註
     ul
       li 目前能清理的網址如下：
-      li "utm_source" 之類的參數
-      li "gclid"
-      li "fbclid"
-      li udn news 的 "from" 參數
-      li amazon 商品頁的網址
-      li youtube 影片網址會去掉所有除了時間戳記之外的參數
+        ul
+          li "utm_source" 之類的參數
+          li "gclid"
+          li "fbclid"
+          li udn news 的 "from" 參數
+          li amazon 商店頁或商品頁的網址
+          li youtube 影片網址會去掉所有除了時間戳記之外的參數
       li 
         | 這個 app 主要的價值還是在行動裝置上使用，在 PC 上建議
         | 使用瀏覽器的外掛可以更無腦的達到目的，

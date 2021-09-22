@@ -1,6 +1,6 @@
 module.exports = {
   pwa: {
-    start_url: './?mode=standalone',
+    start_url: './',
     name: 'url-cleanup',
     themeColor: '#f0f0f0',
     msTileColor: '#b6d8ec',

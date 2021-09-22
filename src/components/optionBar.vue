@@ -26,6 +26,7 @@ section.qrcode(:class="{active}")
 </template>
 
 <script>
+/* eslint-disable no-console */
 import ClipboardJS from 'clipboard';
 import QrcodeVue from 'qrcode.vue';
 export default {

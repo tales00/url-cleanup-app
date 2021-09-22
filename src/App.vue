@@ -11,6 +11,7 @@ AppScaffold(
 </template>
 
 <script>
+/* eslint-disable no-console */
 import AppScaffold from '@/components/AppScaffold.vue';
 import HeaderBar from './components/HeaderBar.vue';
 import FooterBar from './components/FooterBar.vue';

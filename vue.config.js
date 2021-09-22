@@ -6,7 +6,8 @@ module.exports = {
     msTileColor: '#b6d8ec',
     display: 'portrait',
     workboxOptions: {
-      exclude: ['_redirects'],
+      // exclude: ['_redirects'],
+      exclude: [/\.map$/, /_redirects/],
     },
     manifestOptions: {
       background_color: '#b6d8ec',

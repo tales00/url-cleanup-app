@@ -54,6 +54,8 @@ main.usage
           li "gclid"
           li "fbclid"
           li udn news 的 "from" 參數
+          li ettoday 的 "from" 參數
+          li twitter 的 "t"、"s" 參數
           li amazon 商店頁或商品頁的網址
           li youtube 影片網址會去掉所有除了時間戳記之外的參數
       li 

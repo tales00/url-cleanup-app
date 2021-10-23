@@ -89,8 +89,22 @@ export default {
             }
           }
 
+          // https://twitter.com/takanashikiara/status/1451693159675744263?s=21
+          if (
+            url.hostname.includes(twitter.com) &&
+            url.pathname.split('/').includes('status') &&
+            ['s', 't'].includes(key)
+          ) {
+            deleteList.push(key);
+          }
+
           // 清除 udn 的 from
           if (url.hostname.includes('https://udn.com/news/')) {
+            deleteList.push('from');
+          }
+
+          // 清除 ettoday 的 from
+          if (url.hostname.includes('https://www.ettoday.net/')) {
             deleteList.push('from');
           }
 
